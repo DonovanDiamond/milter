@@ -1,3 +1,3 @@
-module github.com/phalaaxx/milter
+module github.com/DonovanDiamond/milter
 
 go 1.19
