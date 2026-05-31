@@ -38,4 +38,7 @@ type Milter interface {
 	// Body is called at the end of each message
 	//   all changes to message's content & attributes must be done here
 	Body(m *Modifier) (Response, error)
+
+	// Abort is called to reset the current message filters
+	Abort(m *Modifier) error
 }

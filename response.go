@@ -15,9 +15,9 @@ func (r SimpleResponse) Response() *Message {
 	return &Message{byte(r), nil}
 }
 
-// Continue to process milter messages only if current code is Continue
+// Continue to process milter messages
 func (r SimpleResponse) Continue() bool {
-	return byte(r) == rspContinue
+	return true
 }
 
 // Define standard responses with no data
@@ -41,13 +41,8 @@ func (c *CustomResponse) Response() *Message {
 	return &Message{c.code, c.data}
 }
 
-// Continue returns false if milter chain should be stopped, true otherwise
+// Continue returns true to keep the milter session alive
 func (c *CustomResponse) Continue() bool {
-	for _, q := range []byte{rspAccept, rspDiscard, rspReject, rspTempFail} {
-		if c.code == q {
-			return false
-		}
-	}
 	return true
 }
 
